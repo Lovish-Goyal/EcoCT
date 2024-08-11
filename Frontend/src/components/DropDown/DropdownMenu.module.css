@@ -1,0 +1,41 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px; /* Adjust size as needed */
+  color: white; /* Ensure icon color is white */
+  transition: color 0.3s; /* Smooth color transition */
+  z-index: 10000; /* High z-index to ensure it appears on top */
+}
+
+.dropdownButton.open {
+  color: white; /* White color when open */
+}
+
+.dropdownMenu {
+  display: block;
+  position: absolute;
+  top: 60px; /* Position below the navbar */
+  right: 0;
+  background-color: #333;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure menu is below the button but above other content */
+}
+
+.dropdownItem {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownItem:hover {
+  background-color: #575757;
+}

@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.image {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../images/y.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container{
+    height: 570px;
+    width: 800px;
+    background-color: white;
+    display: flex;
+    color: white;
+}
+
+.registerForm{
+    width: 400px;
+    background-color: rgb(55, 92, 204);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 30px;
+}
+
+.logoContainer{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    height: 100px;
+    width: 200px;
+    background-image: url("../../../images/new_logo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.note{
+    margin: 10px 0;
+    font-size: 18px;
+    color: rgb(165, 214, 222);
+}
+
+input {
+    margin: 10px 0;
+    padding: 5px;
+    border: none;
+}
+
+.forgot_password{
+    display: flex;
+    justify-content: end;
+}
+
+.linktag{
+    text-decoration: none;
+    color: rgb(188, 188, 243);
+    font-size: 15px;
+}
+
+.linktag:hover{
+    color: #98FF98;
+}
+
+.registerButton{
+    height: 30px;
+    margin: 20px;
+    font-size: 20px;
+    color: rgb(74, 34, 159);
+    background: white;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.new_account{
+    text-align: center;
+}
+
+.registerImage{
+    width: 400px;
+    background-color: white;
+    background-image: url("../../../images/register.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .registerImage{
+        display: none;
+    }
+
+    .registerForm{
+        width: 100%;
+        margin: 50px;
+    }
+
+    .container{
+        width: 100%;
+        height: 670px;
+        display: flex;
+        justify-content: center;
+        background-color: transparent;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+  .heading{
+    font-size: 20px;
+  }
+  .note{
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+    .registerForm{
+        margin: 0 30px;
+    }
+    .note{
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .image {
+       display: block;
+       padding: 50px 0;
+    }
+    .container{
+        height: 100%;
+    }
+  }

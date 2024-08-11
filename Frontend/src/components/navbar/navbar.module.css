@@ -1,0 +1,83 @@
+.navbar{
+    height: 60px;
+    background-color: rgb(74, 34, 159);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    overflow: hidden;
+}
+
+.navbar > .web_name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.navbar > .web_name >a > span{
+    color: lightgreen;
+}
+
+.navbar > .navbar_items{
+    display: flex;
+    color: white;
+}
+
+.navbar > .navbar_items > a{
+    margin: 0 30px;
+    font-size: 16px;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login,.register{
+    font-size: 16px;
+    margin: 0 10px;
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.navbar > .auth {
+    display: flex;
+}
+
+/* Effets on the fields */
+
+.navbar > .navbar_items > a:hover{
+    color: rgb(26, 162, 220);
+}
+
+.login:hover, .register:hover {
+    opacity: 0.5;
+}
+
+/* Media Query and Responsiveness */
+
+@media (max-width: 1050px) {
+    .navbar > .auth{
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar > .navbar_items{
+        display: none;
+    }
+    .navbar{
+       padding: 0 20px;
+    }
+    .navbar > .auth{
+        display: flex;
+    }
+}
+
+@media (max-width: 450px) { 
+    .navbar > .auth{
+        display: none;
+    }
+}

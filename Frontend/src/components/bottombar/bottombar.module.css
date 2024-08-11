@@ -1,0 +1,133 @@
+.bottombarcontainer{
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgb(41, 40, 40);
+    color: rgb(222, 218, 218);
+    place-content: center;
+    place-items: center;
+}
+
+.bottombarcontainer > .column1 > .head {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bottombarcontainer > .column1 > .head > span{
+    color: lightseagreen;
+}
+
+.bottombarcontainer > .column1 > .content{
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.bottombarcontainer > .column2 > .head{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: start;
+}
+
+.bottombarcontainer > .column2  > ul {
+    list-style-type: circle;
+}
+
+.bottombarcontainer > .column2 > ul > li{
+    margin: 10px 0;
+}
+
+.bottombarcontainer > .column2 > ul > li > a {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.bottombarcontainer > .column2 > ul > li > a:hover {
+    cursor: pointer;
+}
+
+.bottombarcontainer > .column3 {
+    width: 100%;
+}
+
+.bottombarcontainer > .column3 > .head{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.bottombarcontainer > .column3 > form{
+    background-color: gray;
+    opacity: 0.9;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.bottombarcontainer > .column3 > form > input {
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.bottombarcontainer > .column3 > form > textarea {
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.bottombarcontainer > .column3 > form > button {
+    padding: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+    background-color: rgb(74, 34, 159);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.bottombarcontainer > .column2 > ul > li > a:hover{
+    color: rgb(162, 130, 231);
+}
+
+@media screen and (max-width: 1050px) {
+    .bottombarcontainer{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .bottombarcontainer{
+        padding: 20px;
+    }
+
+    .bottombarcontainer > .column2 > ul{
+        margin-left: 20px;
+    }
+
+    .bottombarcontainer > .column3 {
+        width: 100%;
+    }
+    .bottombarcontainer > .column3 > form{
+        width: 100%;
+    }
+}
+
+.main > .footer{
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(41, 40, 40);
+    opacity: 0.9;
+}

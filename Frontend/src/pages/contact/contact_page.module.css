@@ -1,0 +1,185 @@
+.container{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.page_heading {
+    font-size: 50px;
+    color: rgb(74, 34, 159);
+    font-weight: bold;
+}
+
+.small_heading{
+    font-size: 20px;
+    color: grey;
+    margin: 30px 0;
+    text-align: justify;
+}
+
+.formcontainer {
+    display: flex;
+    background-color: rgb(74, 34, 159);
+    border-radius: 5x;
+    border: 1px solid black;
+    margin: 50px 0;
+}
+
+.column1 {
+    width: 800px;
+    background-color: white;
+    padding: 20px;
+}
+.column2{
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+form > .form_heading{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+form label {
+    font-size: 20px;
+}
+
+form input{
+    text-decoration: none;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+form textarea{
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.column2 > .c2_heading{
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.column2 > .c2_head{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 50px 0;
+}
+
+.column2 > .c2_content{
+    margin: 20px 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+hr{
+    margin: 20px 0;
+}
+
+.submit_button {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(74, 34, 159);
+    color: white;
+    font-weight: bold;
+    border: none;
+
+}
+
+.mg10 {
+    margin: 10px;
+}
+
+.brandname{
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 80px;
+    background-color: white;
+    color: rgb(74, 34, 159);
+}
+
+@media screen and (min-width:1100px) {
+    .container{
+        margin: 50px;
+    }
+    .column2 > .c2_heading{
+        font-size: 40px;
+    }
+    .column2 > .c2_head{
+        font-size: 25px;
+    }
+    
+    .column2 > .c2_content{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .container {
+        padding: 20px;
+    }
+    .page_heading{
+        margin-top: 10px;
+        font-size: 30px;
+    }
+    form > .form_heading{
+        font-size: 22px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+        padding: 10px;
+        background-color: rgb(74, 34, 159);
+        color: white;
+    }
+
+    .formcontainer {
+        flex-direction: column;
+        gap: 20px;
+        border: none;
+        margin-top: 20px;
+        background-color: white;
+    }
+
+    .column1{
+        border: 1px solid black;
+        width: 100%;
+        padding: 0;
+    }
+
+    .column2{
+        background-color: rgb(74, 34, 159);
+        height: 550px;
+        padding: 20px;
+        text-align: start;
+    }
+
+    .column2 > .c2_heading{
+        margin-bottom: 20px;
+    }
+
+    .column2 > .c2_content{
+        color: rgb(197, 196, 196);
+        margin: 5px;
+    }
+
+    .brandname{
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        font-size: 50px;
+        margin-top: 80px;
+    }
+}
+
+
+@media screen and (max-width:450px) {
+    .brandname{
+        margin-top: 20px;
+    }
+}
+
