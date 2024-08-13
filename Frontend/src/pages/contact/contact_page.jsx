@@ -1,6 +1,16 @@
 import styles from "./contact_page.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ContactPage() {
+
+    const navigate = useNavigate();
+
+    const handleclick = (e) => {
+        e.preventDefault();
+        alert("Email sent successfully");
+        navigate("/home")
+    }
+
     return <>
     <div className={styles.container}>
     <div className={styles.page_heading}>Welcome to Help Center (EcoCT).
@@ -10,20 +20,20 @@ export default function ContactPage() {
         <div className={styles.formcontainer}>
             <div className={styles.column1}>
             <form action="">
-                <div className={styles.form_heading}>
-                Enter Your Details:</div>
-                <label className={styles.mg10} htmlFor="username">Your Name</label>
-                <input className={styles.mg10} type="text" placeholder="Enter you name" />
-                    <label className={styles.mg10} htmlFor="useremail">Your Email</label>
-                    <input className={styles.mg10} type="text" placeholder="Enter you Email" />
-                    <label className={styles.mg10} htmlFor="mobile">Mobile No.</label>
-                    <input className={styles.mg10} type="number" placeholder="Enter you Mobile number" />
-                    <label className={styles.mg10} htmlFor="address">Your Address</label>
-                    <input className={styles.mg10} type="text" placeholder="Enter you address" />
-                    <label className={styles.mg10} htmlFor="message">Message</label>
-                    <textarea className={styles.mg10} type="text" placeholder="Enter you Message" rows="5"/>
-                    <button className={styles.submit_button}>Submit</button>
-            </form>
+    <div className={styles.form_heading}>Enter Your Details:</div>
+    <label className={styles.mg10} htmlFor="username">Your Name</label>
+    <input className={styles.mg10} type="text" name="username" placeholder="Enter your name" required />
+    <label className={styles.mg10} htmlFor="useremail">Your Email</label>
+    <input className={styles.mg10} type="email" name="useremail" placeholder="Enter your email" required />
+    <label className={styles.mg10} htmlFor="mobile">Mobile No.</label>
+    <input className={styles.mg10} type="tel" name="mobile" placeholder="Enter your mobile number" required />
+    <label className={styles.mg10} htmlFor="address">Your Address</label>
+    <input className={styles.mg10} type="text" name="address" placeholder="Enter your address" required />
+    <label className={styles.mg10} htmlFor="message">Message</label>
+    <textarea className={styles.mg10} name="message" placeholder="Enter your message" rows="5" required></textarea>
+    <button className={styles.submit_button} onClick={handleclick} >Submit</button>
+</form>
+
             </div>
             <div className={styles.column2}>
                 <div className={styles.c2_heading}>Contact Information</div>

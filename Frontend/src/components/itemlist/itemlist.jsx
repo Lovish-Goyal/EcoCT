@@ -1,5 +1,7 @@
-import styles from "./itemlist.module.css";
-function taskList() {
+import React, { useState } from 'react';
+import styles from './itemlist.module.css';
+
+function TaskList() {
     const items = [
         {
             Scrap_image: "https://5.imimg.com/data5/SELLER/Default/2021/6/QL/NJ/ZA/55543718/fb-img-1617907919889-jpg-500x500.jpg",
@@ -182,29 +184,100 @@ function taskList() {
             Price: "300",
         }
     ];    
-    return <>
-    <div className={styles.itemlistContainer}>
-        {items.map((item,index) => (
-            <div className={styles.item_box} key={index}>
-                <div className={styles.column1}>
-                    <div className={styles.Price}>Rs: {item.Price}/Kg</div>
-                    <img className={styles.Scrap_image} src={item.Scrap_image} alt="" />
-                </div>
-                
-                <div className={styles.column2}>
-                <div className={styles.Scrap_content}>
+
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile: '',
+  });
+  const [status, setStatus] = useState('');
+
+  const handleButtonClick = (item) => {
+    setSelectedItem(item);
+    setFormData({
+      name: '',
+      mobile: '',
+    });
+    setIsFormVisible(true);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Booking successful!")
+    console.log('Form submitted with:', formData);
+    setStatus('Booking successful!');
+    setIsFormVisible(false); // Hide form after submission
+  };
+
+  return (
+    <>
+      <div className={styles.itemlistContainer}>
+        {items.map((item, index) => (
+          <div className={styles.item_box} key={index}>
+            <div className={styles.column1}>
+              <div className={styles.Price}>Rs: {item.Price}/Kg</div>
+              <img className={styles.Scrap_image} src={item.Scrap_image} alt="" />
+            </div>
+            <div className={styles.column2}>
+              <div className={styles.Scrap_content}>
                 <div className={styles.Scrap_Type}>Scrap_Type: {item.Scrap_Type}</div>
                 <div className={styles.Material}>Material: {item.Material}</div> 
                 <div className={styles.Contact_No}>Contact No: {item.Contact_No}</div>
                 <div className={styles.Payment_Mode}>Payment: {item.Payment_Mode}</div>
                 <div className={styles.Origin}>Origin: {item.Origin}</div>
-                </div>
-                <button className={styles.bookButton}>Book Now</button>
-                </div>
+              </div>
+              <button className={styles.bookButton} onClick={() => handleButtonClick(item)}>Book Now</button>
             </div>
+          </div>
         ))}
-    </div>
+      </div>
+
+      {isFormVisible && selectedItem && (
+        <div className={styles.formPopup}>
+          <div className={styles.formContainer}>
+            <h3>Scrap Material:{selectedItem.Material}</h3>
+            <h3>Price:{selectedItem.Price}</h3>
+            <h3>Enter Your Details:</h3>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="mobile">Mobile Number:</label>
+                <input
+                  type="text"
+                  id="mobile"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit" className={styles.submitButton}>Submit</button>
+            </form>
+            {status && <p className={styles.statusMessage}>{status}</p>}
+          </div>
+        </div>
+      )}
     </>
+  );
 }
 
-export default taskList;
+export default TaskList;

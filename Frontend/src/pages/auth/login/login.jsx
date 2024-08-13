@@ -1,6 +1,6 @@
 import styles from "./login.module.css";
-import {Link} from "react-router-dom";
-import React, { useState } from 'react';
+import {Link, useNavigate} from "react-router-dom";
+import React, { useState} from 'react';
 function LoginPage() {
 
     const [formData, setFormData] = useState({
@@ -12,6 +12,8 @@ function LoginPage() {
         email: '',
         password: ''
       });
+
+      const navigate = useNavigate();
     
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,10 +47,29 @@ function LoginPage() {
         return isValid;
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-          console.log('Form submitted:', formData);
+          try {
+            const response = await fetch("http://localhost:8080/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: formData.email, password: formData.password })
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                console.log("Login successful");
+                console.log(user)
+                navigate("/profile", { state: { user } });
+            } else {
+                alert("Login failed: " + response.statusText);
+            }
+        } catch (error) {
+            console.log("Error:", error);
+        }
         }
       };
 
@@ -60,11 +81,11 @@ function LoginPage() {
                     <div className={styles.logoContainer}><div className={styles.logo}></div></div>
                     <div className={styles.note}>Enter Your Login Details -</div>
                     <label htmlFor="email">Email</label>
-                    <input name="email" type="email" placeholder="Enter your Email" value={formData.email}
+                    <input id="email" name="email" type="email" placeholder="Enter your Email" value={formData.email}
           onChange={handleChange}/>
           {errors.email && <p className="error" style={{color: "red", fontSize: "15px"}}>{errors.email}</p>}
                     <label htmlFor="password">Password</label>
-                    <input name="password" type="password" placeholder="Enter your password" value={formData.password}
+                    <input id="password" name="password" type="password" placeholder="Enter your password" value={formData.password}
           onChange={handleChange}/>
           {errors.password && <p className="error" style={{color: "red", fontSize: "15px"}}>{errors.password}</p>}
                     <button type="submit" className={styles.LoginButton}>Login</button>
