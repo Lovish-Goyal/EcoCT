@@ -14,7 +14,6 @@ function NavBar() {
         <Link to="/contact">Contact Us</Link>
       </div>
       <div className={styles.auth}>
-        {/* Always show these links since we're removing session logic */}
         <Link to="/login">
           <div className={styles.login}>Login</div>
         </Link>

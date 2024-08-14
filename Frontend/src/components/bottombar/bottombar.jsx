@@ -1,12 +1,47 @@
+import React, { useState } from "react";
 import styles from "./bottombar.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BottomBar() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleclick = (e) => {
-    e.preventDefault(); // Prevent form submission to avoid page reload
-    alert("Thanks for Contacting Us");
+  const validateForm = () => {
+    let isValid = true;
+
+    // Email validation
+    if (!email) {
+      toast.error('Email is required.');
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) { // Simple regex for email validation
+      toast.error('Please enter a valid email address.');
+      isValid = false;
+    }
+
+    // Message validation
+    if (!message) {
+      toast.error('Message cannot be empty.');
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return; 
+    }
+
+    toast.success("Thanks for Contacting Us");
+
+    setEmail('');
+    setMessage('');
+
     navigate("/home");
   };
 
@@ -30,11 +65,13 @@ function BottomBar() {
         </div>
         <div className={styles.column3}>
           <div className={styles.head}>Contact Me!</div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <textarea
@@ -42,15 +79,18 @@ function BottomBar() {
               id="message"
               placeholder="Message..."
               rows="5"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               required
             ></textarea>
-            <button onClick={handleclick}>Send</button>
+            <button type="submit">Send</button>
           </form>
         </div>
       </div>
       <footer className={styles.footer}>
         <p>Thanks for visiting our website</p>
       </footer>
+      <ToastContainer />
     </div>
   );
 }

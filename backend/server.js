@@ -6,12 +6,13 @@ import mongoose from "mongoose";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your frontend URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 

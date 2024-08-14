@@ -1,6 +1,8 @@
 .dropdown {
-  position: relative;
-  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
 }
 
 .dropdownButton {
@@ -8,10 +10,10 @@
   border: none;
   cursor: pointer;
   padding: 10px;
-  font-size: 24px; /* Adjust size as needed */
-  color: white; /* Ensure icon color is white */
+  font-size: 24px;
+  color: white; 
   transition: color 0.3s; /* Smooth color transition */
-  z-index: 10000; /* High z-index to ensure it appears on top */
+  z-index: 10000; 
 }
 
 .dropdownButton.open {
@@ -21,9 +23,9 @@
 .dropdownMenu {
   display: block;
   position: absolute;
-  top: 60px; /* Position below the navbar */
-  right: 0;
-  background-color: #333;
+  top: 50px; /* Position below the navbar */
+  right: -10px;
+  background-color: rgb(74, 34, 159);
   min-width: 150px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 9999; /* Ensure menu is below the button but above other content */
@@ -38,4 +40,10 @@
 
 .dropdownItem:hover {
   background-color: #575757;
+}
+
+@media (max-width: 450px) { 
+  .dropdown {
+    display: inline;
+  }
 }

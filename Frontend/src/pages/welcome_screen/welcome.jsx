@@ -8,7 +8,6 @@ import BottomBar from "../../components/bottombar/bottombar.jsx";
 function welcome_screen() {
     return <>
     <div className={styles.welcome_screen}>
-    
     <nav>
         <div className={styles.logo}></div>
         <div className={styles.nav_links}><ul>
@@ -18,9 +17,6 @@ function welcome_screen() {
         <li > <Link to="contact" className={styles.nav_link}> Contact Us</Link></li></ul></div>
     </nav>
     <div className={styles.body_container}>
-        
-        {/* content of the body */}
-        
         <div className={styles.body_content}>
             <div className={styles.heading}>
               Welcome to Eco<span>CT</span> ! 🌱
@@ -36,8 +32,6 @@ function welcome_screen() {
             </div>
             <Link to="/home" className={styles.submit_button}> Get Started</Link>
         </div>
-
-        {/* image of the body  */}
         <div className={styles.body_image}>
             <img className={styles.e_image} src={image} alt="" />
         </div>

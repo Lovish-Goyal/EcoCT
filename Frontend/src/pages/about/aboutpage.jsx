@@ -3,7 +3,7 @@ import image1 from "../../images/our_mission.jpg";
 import image2 from "../../images/choose_us.jpg";
 import image3 from "../../images/our_team.jpg";
 import cx from "classnames";
-export default function AboutPage(params) {
+export default function AboutPage() {
     return <>
     <div className={styles.head_image}>
         About Us

@@ -42,6 +42,7 @@
     top: 0;
     margin-left: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .Scrap_image{
@@ -67,44 +68,6 @@
     margin-bottom: 10px;
 }
 
-@media screen and (max-width: 1350px) {
-    .itemlistContainer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin: 20px;
-    }
-}
-
-@media screen and (max-width: 900px) {
-    .itemlistContainer {
-        display: grid;
-        grid-template-columns: 1fr;
-        margin: 20px;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .item_box{
-        height: 180px;
-    }
-
-    .Scrap_image{
-        height: 150px;
-    }
-    
-    .Scrap_content{
-        font-size: 10px;
-        height: 140px;
-    }
-
-    .Scrap_Type{
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-}
-
-
 .formPopup {
     position: fixed;
     top: 0;
@@ -122,7 +85,7 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
   
@@ -158,3 +121,52 @@
     margin-top: 10px;
     color: green;
   }
+  
+  h2{
+    text-align: center;
+    color: rgb(15, 176, 239);
+  }
+
+@media screen and (max-width: 1350px) {
+    .itemlistContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 20px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .itemlistContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+    .formContainer {
+        width: 400px;
+      }
+}
+
+@media screen and (max-width: 450px) {
+    .item_box{
+        height: 180px;
+    }
+
+    .Scrap_image{
+        height: 150px;
+    }
+    
+    .Scrap_content{
+        font-size: 10px;
+        height: 140px;
+    }
+
+    .Scrap_Type{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .formContainer {
+        width: 100%;
+        margin: 20px;
+      }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './itemlist.module.css';
+import {toast } from 'react-toastify';
 
 function TaskList() {
     const items = [
@@ -198,6 +199,8 @@ function TaskList() {
     setFormData({
       name: '',
       mobile: '',
+      quantity: '',
+      Address: '',
     });
     setIsFormVisible(true);
   };
@@ -212,10 +215,14 @@ function TaskList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Booking successful!")
-    console.log('Form submitted with:', formData);
+    toast.success("Booking successful!"); 
+    // console.log('Form submitted with:', formData); 
     setStatus('Booking successful!');
-    setIsFormVisible(false); // Hide form after submission
+    setTimeout(() => {
+      setIsFormVisible(false);
+      setStatus('');
+    }, 1000);
+
   };
 
   return (
@@ -246,8 +253,19 @@ function TaskList() {
           <div className={styles.formContainer}>
             <h3>Scrap Material:{selectedItem.Material}</h3>
             <h3>Price:{selectedItem.Price}</h3>
-            <h3>Enter Your Details:</h3>
+            <h2>Enter Your Details:</h2>
             <form onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+                <label htmlFor="quantity">Quantity (Kg):</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  value={formData.quantity}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
               <div className={styles.formGroup}>
                 <label htmlFor="name">Name:</label>
                 <input
@@ -262,10 +280,21 @@ function TaskList() {
               <div className={styles.formGroup}>
                 <label htmlFor="mobile">Mobile Number:</label>
                 <input
-                  type="text"
+                  type="number"
                   id="mobile"
                   name="mobile"
                   value={formData.mobile}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="Address">Address:</label>
+                <input
+                  type="text"
+                  id="Address"
+                  name="Address"
+                  value={formData.Address}
                   onChange={handleChange}
                   required
                 />
