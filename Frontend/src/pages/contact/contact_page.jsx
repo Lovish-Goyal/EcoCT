@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import styles from "./contact_page.module.css";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactPage() {
     
@@ -22,20 +19,35 @@ export default function ContactPage() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Show success message
-        toast.success("Email sent successfully");
-        
-        // Clear form fields
-        setFormData({
-            username: '',
-            useremail: '',
-            mobile: '',
-            address: '',
-            message: ''
-        });
+        try {
+            const response = await fetch('http://localhost:8080/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert("Email sent successfully");
+                setFormData({
+                    username: '',
+                    useremail: '',
+                    mobile: '',
+                    address: '',
+                    message: ''
+                });
+            } else {
+                const errorData = await response.json();
+                console.error('Server Error:', errorData);
+                alert.error("Server error: " + (errorData.message || "Something went wrong"));
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error.message);
+            alert.error("An error occurred: " + error.message);
+        }
     };
 
     return (
@@ -53,6 +65,7 @@ export default function ContactPage() {
                             <label className={styles.mg10} htmlFor="username">Your Name</label>
                             <input
                                 className={styles.mg10}
+                                id="username"
                                 type="text"
                                 name="username"
                                 placeholder="Enter your name"
@@ -62,6 +75,7 @@ export default function ContactPage() {
                             />
                             <label className={styles.mg10} htmlFor="useremail">Your Email</label>
                             <input
+                            id="useremail"
                                 className={styles.mg10}
                                 type="email"
                                 name="useremail"
@@ -73,6 +87,7 @@ export default function ContactPage() {
                             <label className={styles.mg10} htmlFor="mobile">Mobile No.</label>
                             <input
                                 className={styles.mg10}
+                                id="mobile"
                                 type="tel"
                                 name="mobile"
                                 placeholder="Enter your mobile number"
@@ -83,6 +98,7 @@ export default function ContactPage() {
                             <label className={styles.mg10} htmlFor="address">Your Address</label>
                             <input
                                 className={styles.mg10}
+                                id="address"
                                 type="text"
                                 name="address"
                                 placeholder="Enter your address"
@@ -93,6 +109,7 @@ export default function ContactPage() {
                             <label className={styles.mg10} htmlFor="message">Message</label>
                             <textarea
                                 className={styles.mg10}
+                                id="message"
                                 name="message"
                                 placeholder="Enter your message"
                                 rows="5"
@@ -100,15 +117,16 @@ export default function ContactPage() {
                                 onChange={handleChange}
                                 required
                             ></textarea>
-                            <button className={styles.submit_button} type="submit">Submit</button>
+                            <button className={styles.submit_button} type="submit">Submit
+                            </button>
                         </form>
                     </div>
                     <div className={styles.column2}>
                         <div className={styles.c2_heading}>Contact Information</div>
                         <label className={styles.c2_head}>🗺️ Location:</label>
-                        <div className={styles.c2_content}>Address 1: #15765 Near Ekta Vihar, New Housing Board Colony, Ambala Cantt(133001), Haryana, India</div>
+                        <div className={styles.c2_content}>Address 1: #15765 Near Ekta Vihar, New Housing Board Colony, Ambala Cantt (133001), Haryana, India</div>
                         <hr />
-                        <label className={styles.c2_head}> 📲 Call Us:</label>
+                        <label className={styles.c2_head}>📲 Call Us:</label>
                         <div className={styles.c2_content}>Mobile No: 9876456300</div>
                         <div className={styles.c2_content}>Landline No.122-8084654</div>
                         <hr />
@@ -119,7 +137,6 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </>
     );
 }

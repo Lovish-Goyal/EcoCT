@@ -43,7 +43,12 @@
 }
 
 .column1 > .username {
-    font-size: 1.5rem;
+    font-size: 16px;
+    color: white;
+}
+
+.column1 > .email {
+    font-size: 18px;
     color: white;
     margin: 10px 0;
 }

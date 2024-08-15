@@ -62,8 +62,12 @@ function LoginPage() {
             if (response.ok) {
                 const user = await response.json();
                 console.log("Login successful");
-                console.log(user)
-                navigate("/profile", { state: { user } });
+                if (user.token) {
+                  localStorage.setItem('token', user.token);
+                }
+                // console.log(user)
+                // navigate("/profile", { state: { user } });
+                navigate("/profile");
             } else {
                 alert("Login failed: " + response.statusText);
             }

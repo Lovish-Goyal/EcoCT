@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './itemlist.module.css';
-import { toast } from 'react-toastify';
 
 function TaskList() {
   const items = [
@@ -234,14 +233,35 @@ function TaskList() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        toast.success("Booking successful!");
-        setStatus('Booking successful!');
-        setTimeout(() => {
-            setIsFormVisible(false);
-            setStatus('');
-        }, 1000);
+        try {
+            const response = await fetch('http://localhost:8080/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert("Booking successfull");
+                setFormData({
+                    name: '',
+            mobile: '',
+            quantity: '',
+            Address: '',
+                });
+                setIsFormVisible(false);
+            } else {
+                const errorData = await response.json();
+                console.error('Server Error:', errorData);
+                alert.error("Server error: " + (errorData.message || "Something went wrong"));
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error.message);
+            alert.error("An error occurred: " + error.message);
+        }
     };
 
     return (
@@ -318,7 +338,8 @@ function TaskList() {
                                     required
                                 />
                             </div>
-                            <button type="submit" className={styles.submitButton}>Submit</button>
+                            <button className={styles.submitButton} type="submit">Book
+                            </button>
                         </form>
                         {status && <p className={styles.statusMessage}>{status}</p>}
                     </div>
