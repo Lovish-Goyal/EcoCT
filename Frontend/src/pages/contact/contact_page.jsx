@@ -42,11 +42,11 @@ export default function ContactPage() {
             } else {
                 const errorData = await response.json();
                 console.error('Server Error:', errorData);
-                alert.error("Server error: " + (errorData.message || "Something went wrong"));
+                alert("Server error: " + (errorData.message || "Something went wrong"));
             }
         } catch (error) {
             console.error('Error submitting form:', error.message);
-            alert.error("An error occurred: " + error.message);
+            alert("An error occurred: " + error.message);
         }
     };
 
