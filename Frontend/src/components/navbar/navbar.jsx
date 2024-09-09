@@ -5,40 +5,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function NavBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileData, setProfileData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No token found, please log in.");
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLoggedIn(true);
+      
+      const fetchProfileData = async () => {
+        try {
+          const response = await fetch("http://localhost:8080/profile", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setProfileData(data);
+          } else {
+            setIsLoggedIn(false); // Token might be invalid, so log out the user.
+            localStorage.removeItem("token");
+          }
+        } catch (error) {
+          console.error("Error fetching profile:", error);
         }
+      };
 
-        const response = await fetch("http://localhost:8080/profile", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Error fetching profile data");
-        }
-
-        const data = await response.json();
-        setProfileData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfileData();
+      fetchProfileData();
+    } else {
+      setIsLoggedIn(false);
+    }
   }, []);
 
   return (
@@ -53,25 +54,17 @@ function NavBar() {
         <Link to="/contact">Contact Us</Link>
       </div>
       <div className={styles.auth}>
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>Error: {error}</div>
-        ) : profileData ? (
+        {isLoggedIn ? (
           <div className={styles.profile}>
             <Link to="/profile">
               <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
-              <span className={styles.profileLink}>{profileData.authData?.username || 'User'}</span>
+              <span className={styles.profileLink}>{profileData?.authData?.username || "User"}</span>
             </Link>
           </div>
         ) : (
           <>
-            <Link to="/login">
-              <div className={styles.login}>Login</div>
-            </Link>
-            <Link to="/register">
-              <div className={styles.login}>Register</div>
-            </Link>
+            <Link to="/login" className={styles.login}>Login</Link>
+            <Link to="/register" className={styles.login}>Register</Link>
           </>
         )}
       </div>

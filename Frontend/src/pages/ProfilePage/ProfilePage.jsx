@@ -77,10 +77,10 @@ function ProfilePage() {
             />
           </div>
           <div className={styles.username}>
-            Name: {profileData?.authData?.username || 'Not Available'}
+            {profileData?.authData?.username || 'Not Available'}
           </div>
           <div className={styles.email}>
-            Email: {profileData?.authData?.email || 'Not Available'}
+            {profileData?.authData?.email || 'Not Available'}
           </div>
           <button className={styles.button1} onClick={handleUpdatePicture}>
             Upload Picture
