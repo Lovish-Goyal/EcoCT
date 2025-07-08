@@ -67,6 +67,8 @@ function LoginPage() {
           // const user = await response.json();
           // console.log("Login successful");
           const contentType = response.headers.get("content-type");
+          console.log(response);
+          console.log(contentType);
           let user = {};
           if (contentType && contentType.includes("application/json")) {
             user = await response.json();

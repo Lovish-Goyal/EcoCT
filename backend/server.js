@@ -8,10 +8,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: "Content-Type,Authorization",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
