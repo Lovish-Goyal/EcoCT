@@ -1,6 +1,6 @@
 import styles from "./register.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -59,7 +59,8 @@ function RegisterPage() {
 
     if (validateForm()) {
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/register`, {
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+        const response = await fetch(`${BACKEND_URL}/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

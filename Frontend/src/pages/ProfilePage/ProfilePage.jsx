@@ -14,7 +14,9 @@ function ProfilePage() {
           throw new Error("No token found, please log in.");
         }
 
-        const response = await fetch(`${process.env.BACKEND_URL}/profile`, {
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+        const response = await fetch(`${BACKEND_URL}/profile`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,7 +33,7 @@ function ProfilePage() {
         setProfileData(data);
 
         if (data?.authData?.profileImage) {
-          setProfileImage(process.env.BACKEND_URL / data.authData.profileImage);
+          setProfileImage(`${BACKEND_URL}/${data.authData.profileImage}`);
         }
       } catch (err) {
         console.error("Error fetching profile data:", err.message);
@@ -50,23 +52,21 @@ function ProfilePage() {
       formData.append("profileImage", file);
 
       const token = localStorage.getItem("token");
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
       try {
-        const res = await fetch(
-          `${process.env.BACKEND_URL}/upload-profile-picture`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            body: formData,
-          }
-        );
+        const res = await fetch(`${BACKEND_URL}/upload-profile-picture`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
 
         const result = await res.json();
 
         if (res.ok) {
-          setProfileImage(process.env.BACKEND_URL / result.imagePath);
+          setProfileImage(`${BACKEND_URL}/${result.imagePath}`);
         } else {
           alert(result.error || "Failed to upload image.");
         }

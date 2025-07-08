@@ -16,7 +16,8 @@ function NavBar() {
 
       const fetchProfileData = async () => {
         try {
-          const response = await fetch("process.env.BACKEND_URL/profile", {
+          const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+          const response = await fetch(`${BACKEND_URL}/profile`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,

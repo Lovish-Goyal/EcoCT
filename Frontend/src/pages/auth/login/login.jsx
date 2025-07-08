@@ -50,7 +50,8 @@ function LoginPage() {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/login`, {
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+        const response = await fetch(`${BACKEND_URL}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
