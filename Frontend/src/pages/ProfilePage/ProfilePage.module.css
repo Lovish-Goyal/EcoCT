@@ -1,164 +1,145 @@
 .ProfileBody {
-    height: 100%;
-    width: 100%;
-    background: url("../../images/jjjj.jpg") no-repeat;
-    background-position: top left;
-    background-size: cover;
-    opacity: 0.9;
+  width: 100%;
+  /* min-height: 100vh; */
+  background-color: white;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ProfileContainer {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-    margin-top: 0; /* Remove top margin */
+  background: linear-gradient(to right, #3f2180, #1f094f);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  /* background: rgba(255, 255, 255, 0.05); */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: #ffffff;   
+  max-width: 1200px;
+  width: 100%;
 }
 
 .column1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 50px;
-    margin-top: 0; /* Remove top margin */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .profileImage {
-    height: 300px;
-    width: 300px;
-    border-radius: 50%;
-    border: 2px solid black;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    margin-bottom: 20px; /* Ensure spacing is applied correctly */
+  height: 220px;
+  width: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #4a90e2;
+  margin: 40px 0;
 }
 
-.profileImage > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.profileImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-.column1 > .username {
-    font-size: 16px;
-    color: white;
+.username {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 5px;
 }
 
-.column1 > .email {
-    font-size: 18px;
-    color: white;
-    margin: 10px 0;
+.email {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
 }
 
-.column1 > .button1,
-.column1 > .button2 {
-    background-color: rgb(20, 152, 234);
-    color: white;
-    border: none;
-    margin: 10px 0;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    width: 100%;
+.button1 {
+  padding: 10px 20px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.column1 > .button2 {
-    background-color: rgb(19, 184, 126);
-}
-
-.column1 > .button1:hover {
-    background-color: rgb(15, 136, 203);
-}
-
-.column1 > .button2:hover {
-    background-color: rgb(17, 155, 108);
+.button1:hover {
+  background: #357ac8;
 }
 
 .column2 {
-    margin-top: 0; /* Remove top margin */
-    color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ProfileAbout h1,
+.column2 h1 {
+  font-size: 1.75rem;
+  margin-bottom: 15px;
+  border-left: 4px solid #4a90e2;
+  padding-left: 12px;
+}
+
+.AboutContent {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.userdetails {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.userdetails span {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .ProfileContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
     padding: 30px;
+  }
+
+  .column1 {
+    align-items: center;
+  }
+
+  .profileImage {
+    height: 180px;
+    width: 180px;
+  }
 }
 
-h1 {
-    margin: 20px 0;
-}
+@media (max-width: 500px) {
+  .ProfileContainer {
+    padding: 20px;
+  }
 
-.column2 > .ProfileAbout > .AboutContent {
-    font-size: 1.25rem;
-    line-height: 1.4;
-}
+  .profileImage {
+    height: 140px;
+    width: 140px;
+  }
 
-.column2 > .profile_fields {
-    margin: 10px;
-}
+  .username {
+    font-size: 1.2rem;
+  }
 
-.column2 > .profile_fields > label {
-    font-size: 1.25rem;
-}
-
-.column2 > .profile_fields > input {
-    font-size: 1.25rem;
-    padding: 10px;
-}
-
-.column2 > .userdetails {
-    font-size: 1.125rem;
-    line-height: 2;
-}
-
-.column2 > .userdetails > span {
-    color: rgb(169, 166, 166);
-}
-
-.Activity {
-    height: 200px;
-    margin: 30px 0; /* Adjust margin to reduce space if necessary */
-}
-
-.Activity_head {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.Activity > hr {
-    height: 5px;
-    background-color: grey;
-}
-
-@media screen and (max-width: 850px) {
-    .ProfileContainer {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 0;
-    }
-
-    .column1 {
-        margin-top: 0; /* Ensure no top margin */
-        margin-bottom: 0;
-    }
-
-    .column1 > .username {
-        font-size: 2rem;
-    }
-
-    .column1 > .button1,
-    .column1 > .button2 {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .profileImage {
-        height: 50vw;
-        width: 50vw;
-    }
-
-    .column1 {
-        margin: 0;
-    }
+  .email {
+    font-size: 0.95rem;
+  }
 }

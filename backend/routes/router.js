@@ -4,6 +4,7 @@ import RegisterController from "../controllers/RegisterController.js";
 import LoginCheckController from "../controllers/LoginCheckController.js";
 import ContactController from "../controllers/ContactController.js";
 import BookingController from "../controllers/BookingController.js";
+import ProfileController from "../controllers/profileController.js";
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.post("/profile", verifyToken, LoginCheckController);
 router.post("/contact", ContactController);
 
 router.post("/booking", BookingController);
+
+router.post("/upload-profile-picture", ProfileController.uploadProfilePicture);
 
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];

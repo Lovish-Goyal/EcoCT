@@ -27,7 +27,7 @@ const LoginController = async (req, res) => {
         email: targetUser.email,
         username: targetUser.username,
       },
-      "secretkey",
+      process.env.JWT_SECRET,
       { expiresIn: "1d" },
       (err, token) => {
         if (err) {

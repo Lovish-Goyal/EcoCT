@@ -1,8 +1,8 @@
 import styles from "./navbar.module.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,10 +13,10 @@ function NavBar() {
 
     if (token) {
       setIsLoggedIn(true);
-      
+
       const fetchProfileData = async () => {
         try {
-          const response = await fetch("http://localhost:8080/profile", {
+          const response = await fetch("process.env.BACKEND_URL/profile", {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ function NavBar() {
             const data = await response.json();
             setProfileData(data);
           } else {
-            setIsLoggedIn(false); // Token might be invalid, so log out the user.
+            setIsLoggedIn(false);
             localStorage.removeItem("token");
           }
         } catch (error) {
@@ -45,7 +45,13 @@ function NavBar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.web_name}>
-        <Link to="/">ECO<span>CT</span></Link>
+        <Link to="/">
+          ECO<span>CT</span>
+          <span style={{ color: "white" }} className={styles.slogan}>
+            {" "}
+            - Reclaim. Renew. Recycle.
+          </span>
+        </Link>
       </div>
       <div className={styles.navbar_items}>
         <Link to="/home">Home</Link>
@@ -57,14 +63,23 @@ function NavBar() {
         {isLoggedIn ? (
           <div className={styles.profile}>
             <Link to="/profile">
-              <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
-              <span className={styles.profileLink}>{profileData?.authData?.username || "User"}</span>
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                className={styles.userIcon}
+              />
+              <span className={styles.profileLink}>
+                {profileData?.authData?.username || "User"}
+              </span>
             </Link>
           </div>
         ) : (
           <>
-            <Link to="/login" className={styles.login}>Login</Link>
-            <Link to="/register" className={styles.login}>Register</Link>
+            <Link to="/login" className={styles.login}>
+              Login
+            </Link>
+            <Link to="/register" className={styles.login}>
+              Register
+            </Link>
           </>
         )}
       </div>

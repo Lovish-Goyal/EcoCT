@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styles from './ProfilePage.module.css';
+import React, { useState, useEffect } from "react";
+import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
   const [profileImage, setProfileImage] = useState(null);
@@ -14,7 +14,7 @@ function ProfilePage() {
           throw new Error("No token found, please log in.");
         }
 
-        const response = await fetch("http://localhost:8080/profile", {
+        const response = await fetch("process.env.BACKEND_URL/profile", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,7 +27,14 @@ function ProfilePage() {
         }
 
         const data = await response.json();
+        console.log("Profile data:", data);
         setProfileData(data);
+
+        if (data?.authData?.profileImage) {
+          setProfileImage(
+            `process.env.BACKEND_URL/${data.authData.profileImage}`
+          );
+        }
       } catch (err) {
         console.error("Error fetching profile data:", err.message);
       } finally {
@@ -38,49 +45,68 @@ function ProfilePage() {
     fetchProfileData();
   }, []);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+    if (file && file.type.startsWith("image/")) {
+      const formData = new FormData();
+      formData.append("profileImage", file);
+
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await fetch(
+          "process.env.BACKEND_URL/upload-profile-picture",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+
+        const result = await res.json();
+
+        if (res.ok) {
+          setProfileImage(`process.env.BACKEND_URL/${result.imagePath}`);
+        } else {
+          alert(result.error || "Failed to upload image.");
+        }
+      } catch (err) {
+        console.error("Upload failed:", err.message);
+      }
     } else {
-      alert('Please select a valid image file.');
+      alert("Please select a valid image file.");
     }
   };
 
   const handleUpdatePicture = () => {
-    document.getElementById('fileInput').click();
+    document.getElementById("fileInput").click();
   };
 
-  useEffect(() => {
-    return () => {
-      if (profileImage) {
-        URL.revokeObjectURL(profileImage);
-      }
-    };
-  }, [profileImage]);
-
   if (loading) {
-    return <div>Loading...</div>; // Show loading state
+    return <div>Loading...</div>;
   }
 
-  // Displaying default content when there's no profile data
   return (
     <div className={styles.ProfileBody}>
       <div className={styles.ProfileContainer}>
         <div className={styles.column1}>
           <div className={styles.profileImage}>
             <img
-              src={profileImage || 'https://via.placeholder.com/300'}
+              src={
+                profileImage ||
+                "https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png"
+              }
               alt="Profile"
               className={styles.profileImageContent}
             />
           </div>
           <div className={styles.username}>
-            {profileData?.authData?.username || 'Not Available'}
+            {profileData?.authData?.username || "Not Available"}
           </div>
           <div className={styles.email}>
-            {profileData?.authData?.email || 'Not Available'}
+            {profileData?.authData?.email || "Not Available"}
           </div>
           <button className={styles.button1} onClick={handleUpdatePicture}>
             Upload Picture
@@ -88,7 +114,7 @@ function ProfilePage() {
           <input
             type="file"
             id="fileInput"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             onChange={handleFileChange}
             accept="image/*"
           />
@@ -97,15 +123,34 @@ function ProfilePage() {
           <div className={styles.ProfileAbout}>
             <h1>About OurSelf</h1>
             <div className={styles.AboutContent}>
-              {/* You can replace this with actual user data if available */}
-              At Ecomind, we are dedicated to creating a sustainable future through the responsible recycling of e-waste. Our mission is to purchase and recycle electronic waste, ensuring that hazardous materials are disposed of properly while valuable resources are reclaimed and reused. We are committed to reducing the environmental impact of electronic waste by offering a reliable and eco-friendly solution for disposing of old and unwanted electronics. By partnering with us, you contribute to a greener planet and support our vision of a more sustainable and responsible future.
+              At EcoCT, our customers are individuals and organizations who
+              share a commitment to environmental responsibility. They
+              understand the importance of properly disposing of electronic
+              waste and actively choose sustainable solutions to reduce their
+              ecological footprint. From households clearing out old devices to
+              businesses managing large-scale tech upgrades, our customers trust
+              us to handle their e-waste safely and ethically. Their support not
+              only drives our mission forward but also plays a vital role in
+              building a cleaner, greener future for everyone.
             </div>
           </div>
           <h1>Contact Information</h1>
-          <div className={styles.userdetails}>Email: <span>ecomind@gmail.com</span></div>
-            <div className={styles.userdetails}>Mobile No.: <span>(+91) 9865874521</span></div>
-            <div className={styles.userdetails}>Landline No.: <span>122 - 8084654</span></div>
-            <div className={styles.userdetails}>Address: <span>#121 Near Sarafa Bazar, New Delhi, India.</span></div>
+          <div className={styles.userdetails}>
+            Email: <span>support@ecoct.com</span>
+          </div>
+          <div className={styles.userdetails}>
+            Mobile No.: <span>(+91) 98658XXXXX</span>
+          </div>
+          <div className={styles.userdetails}>
+            Landline No.: <span>122 - 80XXXXX</span>
+          </div>
+          <div className={styles.userdetails}>
+            Address:{" "}
+            <span>
+              EcoCT 4th Floor, EcoTower Business Park Sector 21, New Delhi –
+              110075 India
+            </span>
+          </div>
         </div>
       </div>
     </div>

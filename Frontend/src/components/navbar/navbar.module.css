@@ -1,6 +1,6 @@
 .navbar{
     height: 60px;
-    background-color: rgb(74, 34, 159);
+    background-color: rgb(59, 32, 118);
     color: white;
     display: flex;
     justify-content: space-between;
@@ -14,8 +14,16 @@
     font-weight: bold;
 }
 
+
 .navbar > .web_name >a > span{
-    color: lightgreen;
+    color: rgb(15, 128, 227);
+}
+
+.navbar  .slogan {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 20px;
+  display: inline;
 }
 
 .navbar > .navbar_items{
@@ -25,7 +33,7 @@
 
 .navbar > .navbar_items > a{
     margin: 0 30px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .navbar a{
@@ -71,6 +79,11 @@
     .navbar > .auth{
         display: none;
     }
+
+    .navbar .slogan {
+  display: none;
+}
+
 }
 
 @media (max-width: 700px) {
