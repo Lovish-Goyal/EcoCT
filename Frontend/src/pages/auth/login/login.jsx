@@ -63,8 +63,17 @@ function LoginPage() {
         });
 
         if (response.ok) {
-          const user = await response.json();
-          console.log("Login successful");
+          // console.log(response);
+          // const user = await response.json();
+          // console.log("Login successful");
+          const contentType = response.headers.get("content-type");
+          let user = {};
+          if (contentType && contentType.includes("application/json")) {
+            user = await response.json();
+          } else {
+            const text = await response.text(); // just in case
+            console.log("Backend ne ye bheja:", text);
+          }
           if (user.token) {
             localStorage.setItem("token", user.token);
           }

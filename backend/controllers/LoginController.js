@@ -20,6 +20,8 @@ const LoginController = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
+    const JWT_SECRET = process.env.JWT_SECRET;
+
     // Generate JWT token
     jwt.sign(
       {
@@ -27,7 +29,7 @@ const LoginController = async (req, res) => {
         email: targetUser.email,
         username: targetUser.username,
       },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: "1d" },
       (err, token) => {
         if (err) {

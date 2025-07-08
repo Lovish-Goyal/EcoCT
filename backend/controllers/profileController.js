@@ -27,7 +27,7 @@ const uploadProfilePicture = (req, res) => {
 
   const token = bearerHeader.split(" ")[1];
 
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+  jwt.verify(token, "secretkey", async (err, decoded) => {
     if (err) {
       return res.status(403).json({ error: "Invalid token" });
     }

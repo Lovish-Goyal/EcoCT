@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel.js";
 
 const LoginCheckController = async (req, res) => {
-  jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
+  jwt.verify(req.token, "secretkey", async (err, authData) => {
     if (err) {
       res.status(403).send({ result: "Invalid token" });
     } else {
